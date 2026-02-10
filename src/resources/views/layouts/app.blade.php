@@ -19,6 +19,15 @@
     <main class="max-w-4xl mx-auto px-4 py-6">
         @yield('content')
     </main>
+    <footer class="bg-gray-800 text-gray-400 mt-12">
+        <div class="max-w-4xl mx-auto px-4 py-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-sm">
+            <p>&copy; {{ date('Y') }} 匿名掲示板</p>
+            <nav class="flex gap-4">
+                <a href="{{ route('threads.index') }}" class="hover:text-white">スレッド一覧</a>
+                <a href="{{ route('threads.create') }}" class="hover:text-white">新規スレッド</a>
+            </nav>
+        </div>
+    </footer>
 </body>
 
 </html>
