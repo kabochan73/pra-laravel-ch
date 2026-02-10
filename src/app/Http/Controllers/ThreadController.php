@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreThreadRequest;
+use App\Models\Post;
 use App\Models\Thread;
 use Illuminate\Http\Request;
 
@@ -16,7 +17,10 @@ class ThreadController extends Controller
             ->paginate(10)
             ->withQueryString();
 
-        return view('threads.index', compact('threads'));
+        $threadCount = Thread::count();
+        $postCount = Post::count();
+
+        return view('threads.index', compact('threads', 'threadCount', 'postCount'));
     }
 
     public function create()

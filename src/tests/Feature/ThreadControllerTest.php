@@ -73,6 +73,26 @@ class ThreadControllerTest extends TestCase
         $response->assertDontSeeText('Vue.js入門');
     }
 
+    public function test_スレッド一覧に統計情報が表示される(): void
+    {
+        $this->createThreadWithPost('スレッド1');
+        $thread2 = $this->createThreadWithPost('スレッド2');
+        $thread2->posts()->create([
+            'post_number' => 2,
+            'name' => '名無しさん',
+            'body' => '2つ目の投稿',
+            'created_at' => now(),
+        ]);
+
+        $response = $this->get(route('threads.index'));
+
+        $response->assertOk();
+        $response->assertSeeText('スレッド数');
+        $response->assertSeeText('総投稿数');
+        $response->assertSeeInOrder(['スレッド数', '2']);
+        $response->assertSeeInOrder(['総投稿数', '3']);
+    }
+
     public function test_キーワードに一致しないスレッドは表示されない(): void
     {
         $this->createThreadWithPost('Laravel入門');

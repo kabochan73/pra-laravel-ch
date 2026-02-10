@@ -5,6 +5,17 @@
 @section('content')
     <h1 class="text-2xl font-bold mb-4">スレッド一覧</h1>
 
+    <div class="grid grid-cols-2 gap-4 mb-4">
+        <div class="bg-white rounded shadow px-4 py-3 text-center">
+            <div class="text-sm text-gray-500">スレッド数</div>
+            <div class="text-2xl font-bold text-blue-800">{{ number_format($threadCount) }}</div>
+        </div>
+        <div class="bg-white rounded shadow px-4 py-3 text-center">
+            <div class="text-sm text-gray-500">総投稿数</div>
+            <div class="text-2xl font-bold text-blue-800">{{ number_format($postCount) }}</div>
+        </div>
+    </div>
+
     <form action="{{ route('threads.index') }}" method="GET" class="mb-4 flex gap-2">
         <input type="text" name="keyword" value="{{ request('keyword') }}" placeholder="スレッドタイトルで検索"
                class="border border-gray-300 rounded px-3 py-2 flex-1">
