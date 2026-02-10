@@ -2,17 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePostRequest;
 use App\Models\Thread;
-use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    public function store(Request $request, Thread $thread)
+    public function store(StorePostRequest $request, Thread $thread)
     {
-        $validated = $request->validate([
-            'name' => 'nullable|max:100',
-            'body' => 'required',
-        ]);
+        $validated = $request->validated();
 
         $nextNumber = $thread->posts()->max('post_number') + 1;
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreThreadRequest;
 use App\Models\Thread;
 use Illuminate\Http\Request;
 
@@ -23,13 +24,9 @@ class ThreadController extends Controller
         return view('threads.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreThreadRequest $request)
     {
-        $validated = $request->validate([
-            'title' => 'required|max:255',
-            'name' => 'nullable|max:100',
-            'body' => 'required',
-        ]);
+        $validated = $request->validated();
 
         $thread = Thread::create(['title' => $validated['title']]);
 
