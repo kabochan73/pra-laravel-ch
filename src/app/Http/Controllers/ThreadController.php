@@ -33,7 +33,7 @@ class ThreadController extends Controller
 
         $thread->posts()->create([
             'post_number' => 1,
-            'name' => $validated['name'] ?: '名無しさん',
+            'name' => ($validated['name'] ?? '') ?: '名無しさん',
             'body' => $validated['body'],
             'created_at' => now(),
         ]);

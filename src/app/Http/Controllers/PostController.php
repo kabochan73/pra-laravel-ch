@@ -18,7 +18,7 @@ class PostController extends Controller
 
         $thread->posts()->create([
             'post_number' => $nextNumber,
-            'name' => $validated['name'] ?: '名無しさん',
+            'name' => ($validated['name'] ?? '') ?: '名無しさん',
             'body' => $validated['body'],
             'created_at' => now(),
         ]);
