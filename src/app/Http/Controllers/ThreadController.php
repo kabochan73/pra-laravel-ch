@@ -7,11 +7,13 @@ use Illuminate\Http\Request;
 
 class ThreadController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $threads = Thread::withCount('posts')
+            ->searchByTitle($request->query('keyword'))
             ->orderByDesc('updated_at')
-            ->paginate(10);
+            ->paginate(10)
+            ->withQueryString();
 
         return view('threads.index', compact('threads'));
     }
@@ -38,7 +40,7 @@ class ThreadController extends Controller
             'created_at' => now(),
         ]);
 
-        return redirect()->route('threads.show', $thread);
+        return redirect()->route('threads.index', $thread);
     }
 
     public function show(Thread $thread)

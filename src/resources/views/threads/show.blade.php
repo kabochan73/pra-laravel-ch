@@ -27,21 +27,25 @@
             <div class="mb-3">
                 <label for="name" class="block text-sm font-semibold mb-1">名前（空欄で「名無しさん」）</label>
                 <input type="text" name="name" id="name" value="{{ old('name') }}" maxlength="100"
-                       class="w-full border rounded px-3 py-2" placeholder="名無しさん">
+                    class="w-full border rounded px-3 py-2" placeholder="名無しさん">
             </div>
 
             <div class="mb-3">
-                <label for="body" class="block text-sm font-semibold mb-1">本文 <span class="text-red-500">*</span></label>
+                <label for="body" class="block text-sm font-semibold mb-1">本文 <span
+                        class="text-red-500">*</span></label>
                 <textarea name="body" id="body" rows="4" required
-                          class="w-full border rounded px-3 py-2 @error('body') border-red-500 @enderror">{{ old('body') }}</textarea>
+                    class="w-full border rounded px-3 py-2 @error('body') border-red-500 @enderror">{{ old('body') }}</textarea>
                 @error('body')
                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                 @enderror
             </div>
-
-            <button type="submit" class="bg-red-800 text-white px-6 py-2 rounded font-semibold hover:bg-red-700">
-                書き込む
-            </button>
+            <div class="flex justify-end">
+                <a href="{{ route('threads.index') }}"
+                    class="text-blue-600 hover:underline mr-4 block bg-blue-100 px-4 py-2 rounded">戻る</a>
+                <button type="submit" class="bg-red-800 text-white px-6 py-2 rounded font-semibold hover:bg-red-700">
+                    書き込む
+                </button>
+            </div>
         </form>
     </div>
 @endsection

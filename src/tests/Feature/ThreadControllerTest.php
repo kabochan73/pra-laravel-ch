@@ -61,6 +61,28 @@ class ThreadControllerTest extends TestCase
         $response->assertRedirect(route('threads.index'));
     }
 
+    public function test_キーワードで検索すると一致するスレッドが表示される(): void
+    {
+        $this->createThreadWithPost('Laravel入門');
+        $this->createThreadWithPost('Vue.js入門');
+
+        $response = $this->get(route('threads.index', ['keyword' => 'Laravel']));
+
+        $response->assertOk();
+        $response->assertSeeText('Laravel入門');
+        $response->assertDontSeeText('Vue.js入門');
+    }
+
+    public function test_キーワードに一致しないスレッドは表示されない(): void
+    {
+        $this->createThreadWithPost('Laravel入門');
+
+        $response = $this->get(route('threads.index', ['keyword' => 'Python']));
+
+        $response->assertOk();
+        $response->assertDontSeeText('Laravel入門');
+    }
+
     // --- create ---
 
     public function test_スレッド作成フォームが表示される(): void

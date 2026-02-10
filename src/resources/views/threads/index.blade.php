@@ -5,6 +5,12 @@
 @section('content')
     <h1 class="text-2xl font-bold mb-4">スレッド一覧</h1>
 
+    <form action="{{ route('threads.index') }}" method="GET" class="mb-4 flex gap-2">
+        <input type="text" name="keyword" value="{{ request('keyword') }}" placeholder="スレッドタイトルで検索"
+               class="border border-gray-300 rounded px-3 py-2 flex-1">
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">検索</button>
+    </form>
+
     @forelse ($threads as $thread)
         <div class="bg-white rounded shadow mb-2 px-4 py-3 hover:bg-gray-50">
             <a href="{{ route('threads.show', $thread) }}" class="block">
