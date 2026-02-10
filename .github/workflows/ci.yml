@@ -24,6 +24,14 @@ jobs:
           --health-timeout=5s
           --health-retries=3
 
+    env:
+      DB_CONNECTION: mysql
+      DB_HOST: 127.0.0.1
+      DB_PORT: 3306
+      DB_DATABASE: testing
+      DB_USERNAME: root
+      DB_PASSWORD: password
+
     defaults:
       run:
         working-directory: src
@@ -48,10 +56,3 @@ jobs:
 
       - name: Run tests
         run: php artisan test
-        env:
-          DB_CONNECTION: mysql
-          DB_HOST: 127.0.0.1
-          DB_PORT: 3306
-          DB_DATABASE: testing
-          DB_USERNAME: root
-          DB_PASSWORD: password
