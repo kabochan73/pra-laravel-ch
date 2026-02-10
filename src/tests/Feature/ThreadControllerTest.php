@@ -103,7 +103,7 @@ class ThreadControllerTest extends TestCase
         ]);
 
         $thread = Thread::first();
-        $response->assertRedirect(route('threads.show', $thread));
+        $response->assertRedirect(route('threads.index'));
 
         $this->assertDatabaseHas('threads', ['title' => '新しいスレッド']);
         $this->assertDatabaseHas('posts', [

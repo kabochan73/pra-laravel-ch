@@ -40,7 +40,7 @@ class ThreadController extends Controller
             'created_at' => now(),
         ]);
 
-        return redirect()->route('threads.index', $thread);
+        return redirect()->route('threads.index');
     }
 
     public function show(Thread $thread)
